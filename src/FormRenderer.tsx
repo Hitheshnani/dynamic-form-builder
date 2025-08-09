@@ -13,9 +13,9 @@ import {
   Box,
   Typography,
 } from '@mui/material'
-import { FormField, FormData, FormValidationErrors } from '../types/form'
-import { validateField } from '../utils/validation'
-import { calculateDerivedValue } from '../utils/derivedFields'
+import { FormField, FormData, FormValidationErrors } from './form'
+import { validateField } from './validation'
+import { calculateDerivedValue } from './derivedFields'
 
 interface FormRendererProps {
   fields: FormField[]
