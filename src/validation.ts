@@ -52,3 +52,20 @@ export const validateField = (value: any, rules: ValidationRule[]): string[] => 
         break;
 
       case 'max':
+        if (value !== '' && value !== null && value !== undefined) {
+          const numValue = Number(value);
+          if (!isNaN(numValue) && numValue > (rule.value as number)) {
+            errors.push(rule.message || `Maximum value is ${rule.value}`);
+          }
+        }
+        break;
+
+      default:
+        // Optional: handle unknown rule types gracefully
+        console.warn(`Unknown validation rule type: ${rule.type}`);
+        break;
+    }
+  }
+
+  return errors;
+};
