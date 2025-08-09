@@ -17,9 +17,9 @@ import {
 import { Delete, Visibility, Add } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { RootState } from '../store/store'
-import { loadForms, deleteForm } from '../store/slices/savedFormsSlice'
-import { loadForm } from '../store/slices/formBuilderSlice'
+import { RootState } from './store'
+import { loadForms, deleteForm } from './savedFormsSlice'
+import { loadForm } from './formBuilderSlice'
 
 const MyForms: React.FC = () => {
   const dispatch = useDispatch()
