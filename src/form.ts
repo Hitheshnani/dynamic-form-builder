@@ -159,4 +159,82 @@ const CreateForm: React.FC = () => {
             <Droppable droppableId="fields">
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {currentForm.fields.map((field
+                  {currentForm.fields.map((field, index) => (
+                    <Draggable key={field.id} draggableId={field.id} index={index}>
+                      {(provided) => (
+                        <Box
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          sx={{ mb: 1, p: 2, border: '1px solid #ccc', borderRadius: 1 }}
+                        >
+                          <FieldEditor
+                            field={field}
+                            onUpdate={(updates) => handleUpdateField(field.id, updates)}
+                            onDelete={() => handleDeleteField(field.id)}
+                          />
+                        </Box>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )}
+      </Paper>
+
+      {/* Add your dialogs for saving and adding fields here */}
+      {/* Example for Add Field Dialog */}
+      <Dialog open={showFieldDialog} onClose={() => setShowFieldDialog(false)}>
+        <DialogTitle>Add New Field</DialogTitle>
+        <DialogContent>
+          <FormControl fullWidth>
+            <InputLabel>Field Type</InputLabel>
+            <Select
+              value={newFieldType}
+              label="Field Type"
+              onChange={(e) => setNewFieldType(e.target.value as FieldType)}
+            >
+              <MenuItem value="text">Text</MenuItem>
+              <MenuItem value="number">Number</MenuItem>
+              <MenuItem value="checkbox">Checkbox</MenuItem>
+              <MenuItem value="select">Select</MenuItem>
+              {/* Add other types as needed */}
+            </Select>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowFieldDialog(false)}>Cancel</Button>
+          <Button onClick={handleAddField} variant="contained">Add</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Example for Save Form Dialog */}
+      <Dialog open={showSaveDialog} onClose={() => setShowSaveDialog(false)}>
+        <DialogTitle>Save Form</DialogTitle>
+        <DialogContent>
+          <TextField
+            label="Form Name"
+            value={dialogFormName}
+            onChange={(e) => setDialogFormName(e.target.value)}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowSaveDialog(false)}>Cancel</Button>
+          <Button
+            onClick={handleSaveForm}
+            variant="contained"
+            disabled={!dialogFormName.trim()}
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
+  )
+}
+
+export default CreateForm
