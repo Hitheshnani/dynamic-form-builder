@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { RootState } from '../store/store'
+import { RootState } from './store'
 
 const Navigation = () => {
   const navigate = useNavigate()
@@ -29,7 +29,9 @@ const Navigation = () => {
               disabled={item.disabled}
               variant={location.pathname === item.path ? 'contained' : 'text'}
               sx={{
-                backgroundColor: location.pathname === item.path ? 'rgba(255,255,255,0.1)' : 'transparent',
+                backgroundColor: location.pathname === item.path
+                  ? 'rgba(255,255,255,0.1)'
+                  : 'transparent',
               }}
             >
               {item.label}
