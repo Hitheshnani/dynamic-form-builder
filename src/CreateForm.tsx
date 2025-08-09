@@ -18,7 +18,7 @@ import {
 import { Add, Save } from '@mui/icons-material'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../store/store'
+import { RootState } from './store'
 import {
   initializeForm,
   addField,
@@ -27,10 +27,10 @@ import {
   reorderFields,
   setFormName,
   clearForm,
-} from '../store/slices/formBuilderSlice'
-import { saveForm } from '../store/slices/savedFormsSlice'
-import FieldEditor from '../components/FieldEditor'
-import { FormField, FieldType } from '../types/form'
+} from './formBuilderSlice'
+import { saveForm } from './savedFormsSlice'
+import FieldEditor from './FieldEditor'
+import { FormField, FieldType } from './form'
 
 const CreateForm: React.FC = () => {
   const dispatch = useDispatch()
@@ -75,10 +75,12 @@ const CreateForm: React.FC = () => {
   const handleDragEnd = (result: any) => {
     if (!result.destination) return
 
-    dispatch(reorderFields({
-      fromIndex: result.source.index,
-      toIndex: result.destination.index,
-    }))
+    dispatch(
+      reorderFields({
+        fromIndex: result.source.index,
+        toIndex: result.destination.index,
+      })
+    )
   }
 
   const handleSaveForm = () => {
@@ -113,11 +115,7 @@ const CreateForm: React.FC = () => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h4">Create Form</Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
-          <Button
-            variant="outlined"
-            onClick={handleClearForm}
-            disabled={!isDirty}
-          >
+          <Button variant="outlined" onClick={handleClearForm} disabled={!isDirty}>
             Clear Form
           </Button>
           <Button
@@ -143,11 +141,7 @@ const CreateForm: React.FC = () => {
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
           <Typography variant="h6">Form Fields</Typography>
-          <Button
-            variant="outlined"
-            startIcon={<Add />}
-            onClick={() => setShowFieldDialog(true)}
-          >
+          <Button variant="outlined" startIcon={<Add />} onClick={() => setShowFieldDialog(true)}>
             Add Field
           </Button>
         </Box>
@@ -231,11 +225,7 @@ const CreateForm: React.FC = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShowSaveDialog(false)}>Cancel</Button>
-          <Button
-            onClick={handleSaveForm}
-            variant="contained"
-            disabled={!dialogFormName.trim()}
-          >
+          <Button onClick={handleSaveForm} variant="contained" disabled={!dialogFormName.trim()}>
             Save
           </Button>
         </DialogActions>
