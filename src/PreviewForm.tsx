@@ -9,10 +9,10 @@ import {
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { RootState } from '../store/store'
-import FormRenderer from '../components/FormRenderer'
-import { FormData, FormValidationErrors } from '../types/form'
-import { validateField } from '../utils/validation'
+import { RootState } from './store'
+import FormRenderer from './FormRenderer'
+import { FormData, FormValidationErrors } from './form'
+import { validateField } from './validation'
 
 const PreviewForm: React.FC = () => {
   const navigate = useNavigate()
@@ -45,7 +45,7 @@ const PreviewForm: React.FC = () => {
 
   const handleSubmit = () => {
     setIsSubmitted(true)
-    
+
     // Validate all fields
     const errors: FormValidationErrors = {}
     currentForm?.fields.forEach(field => {
@@ -54,9 +54,9 @@ const PreviewForm: React.FC = () => {
         errors[field.id] = fieldErrors
       }
     })
-    
+
     setValidationErrors(errors)
-    
+
     if (Object.keys(errors).length === 0) {
       alert('Form submitted successfully!')
       console.log('Form data:', formData)
