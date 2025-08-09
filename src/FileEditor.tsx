@@ -17,7 +17,7 @@ import {
   Collapse,
 } from '@mui/material'
 import { Delete, ExpandMore, ExpandLess } from '@mui/icons-material'
-import { FormField, FieldType, ValidationRule } from '../types/form'
+import { FormField, FieldType, ValidationRule } from './types/form'
 
 interface FieldEditorProps {
   field: FormField
