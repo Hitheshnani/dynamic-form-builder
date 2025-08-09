@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { FormField, FormSchema } from '../../types/form'
+import { FormField, FormSchema } from './form'
 
 interface FormBuilderState {
   currentForm: FormSchema | null
@@ -56,7 +56,6 @@ const formBuilderSlice = createSlice({
         const [movedField] = fields.splice(fromIndex, 1)
         fields.splice(toIndex, 0, movedField)
         
-        // Update order property
         fields.forEach((field, index) => {
           field.order = index
         })
