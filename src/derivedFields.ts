@@ -1,4 +1,4 @@
-import { FormField, FormData } from '../types/form'
+import { FormField, FormData } from './form'
 
 export const calculateDerivedValue = (
   field: FormField,
